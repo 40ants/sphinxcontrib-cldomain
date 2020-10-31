@@ -873,7 +873,10 @@ def index_packages(systems, system_paths, packages, quicklisp, lisps, cl_debug):
     strings for all public symbols.
 
     """
-    command = [which("cldomain")[0]]
+    command = which("cldomain")[:1]
+    if not command:
+        raise RuntimeError('Command cldomain not found')
+
     args = []
 
     for package in packages:
