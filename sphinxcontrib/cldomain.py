@@ -772,10 +772,15 @@ class CLDomain(Domain):
     }
 
     def clear_doc(self, docname):
+        to_remove = []
+
         for fullname, docs in self.data['symbols'].items():
             for (fn, _) in docs:
                 if fn == docname:
-                    del self.data['symbols'][fullname]
+                    to_remove.append(fullname)
+
+        for fullname in to_remove:
+            del self.data['symbols'][fullname]
 
     def find_obj(self, env, name):
         """Find a Lisp symbol for "name", perhaps using the given package
